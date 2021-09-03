@@ -34,6 +34,9 @@ func StartApp(port string) {
 	if os.Getenv(constants.KavenegarApiKey) == "" {
 		e.Logger.Fatalf("you should set %s enviroment variable", constants.KavenegarApiKey)
 	}
+	if os.Getenv(constants.KavenegarOtpTemplate) == "" {
+		e.Logger.Fatalf("you should set %s enviroment variable", constants.KavenegarOtpTemplate)
+	}
 	// validate inputs using go-playground package
 	e.Validator = &Validator{validator: validator.New()}
 	urlMapper()
