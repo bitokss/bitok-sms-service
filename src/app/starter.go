@@ -2,8 +2,10 @@ package app
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/bitokss/bitok-sms-service/constants"
+	"github.com/bitokss/bitok-sms-service/domains/v1"
 	repositories "github.com/bitokss/bitok-sms-service/repositories/postgres/v1"
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
@@ -29,13 +31,16 @@ func (v *Validator) Validate(i interface{}) error {
 // StartApp is function to Start application
 func StartApp(port string) {
 	e = echo.New()
+	if os.Getenv(constants.KavenegarApiKey) == "" {
+		e.Logger.Fatalf("you should set %s enviroment variable", constants.KavenegarApiKey)
+	}
 	// validate inputs using go-playground package
 	e.Validator = &Validator{validator: validator.New()}
 	urlMapper()
 	// initialize postgres and get db instance
 	db := repositories.PostgresInit()
 	// autoMigrate will automatically create tables using domains
-	err := db.AutoMigrate()
+	err := db.AutoMigrate(&domains.Message{})
 	if err != nil {
 		e.Logger.Error(err)
 	}

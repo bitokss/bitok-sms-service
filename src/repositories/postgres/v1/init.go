@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/bitokss/bitok-sms-service/constants"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -14,9 +15,9 @@ var (
 )
 
 func PostgresInit() *gorm.DB {
-	host, user, password, name, port := os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"), os.Getenv("DB_PORT")
+	host, user, password, name, port := os.Getenv(constants.DBHost),
+		os.Getenv(constants.DBUser), os.Getenv(constants.DBPassword),
+		os.Getenv(constants.DBName), os.Getenv(constants.DBPort)
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s", host, user, password, name, port)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

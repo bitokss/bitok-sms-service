@@ -30,3 +30,8 @@ require (
 	gorm.io/driver/postgres v1.1.0
 	gorm.io/gorm v1.21.14
 )
+
+require (
+	github.com/alidevjimmy/go-rest-utils v0.0.0-20210822073547-2b55a3194c14 // indirect
+	github.com/kavenegar/kavenegar-go v0.0.0-20200629080648-6e28263b7162 // indirect
+)
