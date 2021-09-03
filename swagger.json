@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "this is the sms service api for bitok and other scientific associations.",
+    "version": "1.0.0",
+    "title": "Sms Service",
+    "contact": {
+      "email": "ali.hamrani80@gmail.com"
+    }
+  },
+  "host": "api.bitok.com",
+  "basePath": "/sms/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "sms",
+      "description": "sms service api"
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create new user",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User object that needs to be sent to the user service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "invalid input",
+            "schema": {
+              "$ref": "#/definitions/RestResp"
+            }
+          },
+          "401": {
+            "description": "unauthorized - only user with 'add:users' permission",
+            "schema": {
+              "$ref": "#/definitions/RestResp"
+            }
+          },
+          "200": {
+            "description": "success",
+            "schema": {
+              "example": {
+                "message": "string",
+                "error": false,
+                "status": 200,
+                "data": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "description": "http status code"
+        },
+        "error": {
+          "type": "boolean",
+          "description": "check that operation state is success or not "
+        },
+        "data": {
+          "type": "object",
+          "description": "when error is true, data object is empty object or null/nil"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "phone",
+        "email",
+        "username",
+        "firstName",
+        "lastName",
+        "personnelNum",
+        "password"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "personnelNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "password": {
+          "type": "string"
+        },
+        "levelID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "blocked": {
+          "type": "boolean",
+          "default": false
+        },
+        "roles" : {
+          "type": "array",
+          "description": "array of roles id",
+          "default": []
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "permissions" : {
+          "type": "array",
+          "description": "array of permissions id",
+          "default": []
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "required": [
+        "title",
+        "symbol"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      }
+    },
+    "Level": {
+      "type": "object",
+      "required": [
+        "title",
+        "color"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
