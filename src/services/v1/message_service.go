@@ -44,7 +44,6 @@ func (*messageService) SendOtp(message domains.OtpRequest) (rest_response.RestRe
 		return nil, rest_response.NewInternalServerError(err.Error(), nil)
 	}
 	mResp := domains.OtpResp{
-		Message: message.Message,
 		To:      message.To,
 		Code:    message.Code,
 	}

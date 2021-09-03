@@ -98,13 +98,6 @@
         ],
         "parameters": [
           {
-            "name": "message",
-            "in": "body",
-            "type" : "string",
-            "description": "message body",
-            "required": true
-          },
-          {
             "name": "to",
             "in": "body",
             "type" : "string",

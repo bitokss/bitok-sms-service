@@ -20,14 +20,12 @@ type MessageResp struct {
 }
 
 type OtpRequest struct {
-	Message string `json:"message" validate:"required"`
 	To      string `json:"to" validate:"required"`
 	Code    string `json:"code" validate:"required"`
 	Token   string `json:"token" validate:"required"`
 }
 
 type OtpResp struct {
-	Message string `json:"message"`
 	To      string `json:"to"`
 	Code    string `json:"code"`
 }
